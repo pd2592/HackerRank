@@ -9,7 +9,7 @@ public class LinkedList {
 			next = null;
 		}
 	}
-	Node head;
+	static Node head;
 	public void push(int d){
 		Node newNode = new Node(d);
 		newNode.next = head;
@@ -37,13 +37,29 @@ public class LinkedList {
 		node.next = newNode;
 		return;
 	}
-	public void printList(){
+	public Node ReverseList(Node node){
+		Node prev = null;
+		Node current = node;
+		Node next = null;
+		
+		while(current != null){
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		node = prev;
+		return node;
+	}
+	
+	public void printList(Node head){
 		Node node = head;
 		while (node != null)
 		{
 			System.out.print(node.data+" ");
 			node = node.next;
 		}
+		System.out.println();
 	}
 	
 	public static void main(String[] args) {
@@ -52,8 +68,10 @@ public class LinkedList {
 		llist.append(6);
 		llist.append(5);
 		llist.push(2);
-		llist.insertAfter(llist.head.next.next.next.next, 88);
+		llist.insertAfter(llist.head.next.next.next, 88);
 		System.out.println("\nCreated Linked list is: ");
-		llist.printList();
+		llist.printList(head);
+		head = llist.ReverseList(llist.head);
+		llist.printList(head);
 	}
 }
